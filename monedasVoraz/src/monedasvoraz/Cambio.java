@@ -34,18 +34,34 @@ public class Cambio {
          * act: Guarda el valor actual del cambio.
          */
         double act = 0;
+        
+        /**
+         * Se iguala j al numero de posiciones-1 del arreglo x, para poder hacer
+         * el recorrido de atrás hacia adelante.
+         */
         int j = x.length-1;
         
         while(act != monto){
+            /**
+             * Se verifica si el costo de la moneda a evaluar sobre pasa el valor
+             * del monto menos el actual, en caso de ser verdadero, se omite este
+             * valor y se evalua el siguiente costo.
+             */
             while(costoMonedas[j]>(monto - act) && j>0){
                 j = j-1;
             }
-            if(j==0){
-                return new int[0];
-            }
+            
+            /**
+             * Se obtiene el número de monedas del valor que estamos evaluando y
+             * se agregan al arreglo solución X, luego se actualiza el valor actual.
+             */
             x[j] = (int)((monto-act)/costoMonedas[j]);
             act = act + costoMonedas[j]*x[j];
         }
+        
+        /**
+         * Se retorna el arreglo solución.
+         */
         return x;
     }
 }
